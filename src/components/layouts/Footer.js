@@ -9,19 +9,19 @@ export default function Footer() {
             <div className="col-md-4">
               <a href="">
                 <img src="/assets/images/location-white.png" alt="" />
-                <span>phagwara punjab</span>
+                <span>jalandhar punjab</span>
               </a>
             </div>
             <div className="col-md-4">
               <a href="">
                 <img src="/assets/images/telephone-white.png" alt="" />
-                <span>Call : +9112334567890</span>
+                <span>Call : +916207018089</span>
               </a>
             </div>
             <div className="col-md-4">
               <a href="">
                 <img src="/assets/images/envelope-white.png" alt="" />
-                <span>princekumarphg@gmail.com</span>
+                <span>itsrcragini2004@gmail.com</span>
               </a>
             </div>
           </div>
@@ -48,7 +48,7 @@ export default function Footer() {
                 </a>
               </div>
               <div>
-                <a href="https://www.linkedin.com/in/prince-kumar-bb495a1a7/">
+                <a href="https://www.linkedin.com/in/kumari-ragini-3a70bb257/">
                   <img src="/assets/images/linkedin.png" alt="" />
                 </a>
               </div>
