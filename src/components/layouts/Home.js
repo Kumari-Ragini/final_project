@@ -1,7 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { db } from "../admin/Firebase"; // Ensure Firebase is set up in your project
+import { collection, addDoc } from "firebase/firestore";
 
 export default function Home() {
+  const [showChatbox, setShowChatbox] = useState(false);
+  const [userIssue, setUserIssue] = useState({ name: "", email: "", message: "" });
+
+  const handleInputChange = (e) => {
+  const { name, value } = e.target;
+    setUserIssue({ ...userIssue, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const issueCollection = collection(db, "user_issues");
+      await addDoc(issueCollection, userIssue);
+      alert("Issue submitted successfully!");
+      setUserIssue({ name: "", email: "", message: "" });
+    } catch (error) {
+      console.error("Error submitting issue: ", error);
+      alert("Failed to submit issue. Please try again.");
+    }
+  };
   return (
     <div>
       <div className="hero_area">
@@ -114,6 +136,98 @@ export default function Home() {
             </div>
           </div>
         </section>
+        <div>
+      {/* Existing content */}
+      <div className="hero_area">
+        {/* Your existing code */}
+      </div>
+
+      {/* Chatbox Button */}
+      <button
+        onClick={() => setShowChatbox(!showChatbox)}
+        className="chatbox-toggle"
+        style={{
+          position: "fixed",
+          bottom: "20px",
+          right: "20px",
+          background: "#6013d3",
+          color: "white",
+          border: "none",
+          borderRadius: "50%",
+          width: "60px",
+          height: "60px",
+          fontSize: "24px",
+        }}
+      >
+        💬
+      </button>
+
+      {/* Chatbox UI */}
+      {showChatbox && (
+        <div
+          className="chatbox-container"
+          style={{
+            position: "fixed",
+            bottom: "90px",
+            right: "20px",
+            background: "white",
+            boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.2)",
+            borderRadius: "10px",
+            padding: "15px",
+            width: "300px",
+          }}
+        >
+          <h4>Submit an Issue</h4>
+          <form onSubmit={handleSubmit}>
+            <div>
+              <label>Name</label>
+              <input
+                type="text"
+                name="name"
+                value={userIssue.name}
+                onChange={handleInputChange}
+                required
+                style={{ width: "100%", marginBottom: "10px" }}
+              />
+            </div>
+            <div>
+              <label>Email</label>
+              <input
+                type="email"
+                name="email"
+                value={userIssue.email}
+                onChange={handleInputChange}
+                required
+                style={{ width: "100%", marginBottom: "10px" }}
+              />
+            </div>
+            <div>
+              <label>Message</label>
+              <textarea
+                name="message"
+                value={userIssue.message}
+                onChange={handleInputChange}
+                required
+                style={{ width: "100%", marginBottom: "10px" }}
+              ></textarea>
+            </div>
+            <button
+              type="submit"
+              style={{
+                background: "#6013d3",
+                color: "white",
+                border: "none",
+                padding: "10px",
+                borderRadius: "5px",
+                cursor: "pointer",
+              }}
+            >
+              Submit
+            </button>
+          </form>
+        </div>
+      )}
+    </div>
       </div>
     </div>
   );

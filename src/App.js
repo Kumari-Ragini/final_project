@@ -41,7 +41,6 @@ function App() {
           <Route path="/makecomplaint" element={<Makecomplaint />}></Route>
           <Route path="/track" element={<Track />}></Route>
           <Route path="/tracking" element={<Tracking />}></Route>
-
           <Route path="/contactwarden" element={<Contactwarden />}></Route>
 
           <Route path="/dashboard" element={<Dashboard />}></Route>
